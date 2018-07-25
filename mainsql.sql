@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2018 at 05:20 AM
+-- Generation Time: Jul 25, 2018 at 09:17 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -75,7 +75,7 @@ INSERT INTO `address` (`ad_id`, `state`, `street`, `country`) VALUES
 
 CREATE TABLE `aircrafts` (
   `ac_id` int(11) NOT NULL,
-  `ac_number` varchar(32) NOT NULL,
+  `aircraft_no` varchar(32) NOT NULL,
   `capacity` int(11) NOT NULL,
   `mfdby` varchar(128) NOT NULL,
   `mfdon` date NOT NULL
@@ -85,9 +85,15 @@ CREATE TABLE `aircrafts` (
 -- Dumping data for table `aircrafts`
 --
 
-INSERT INTO `aircrafts` (`ac_id`, `ac_number`, `capacity`, `mfdby`, `mfdon`) VALUES
+INSERT INTO `aircrafts` (`ac_id`, `aircraft_no`, `capacity`, `mfdby`, `mfdon`) VALUES
 (1, '1111', 60, 'boeing', '2017-06-24'),
-(2, '2222', 60, 'Boeing-747', '2017-06-28');
+(2, '2222', 60, 'Boeing-747', '2017-06-28'),
+(3, '1234', 345, 'bigyan', '0000-00-00'),
+(4, '1242', 1233, 'boieng', '2111-01-01'),
+(6, '1213', 121414, 'bhanu', '0001-01-01'),
+(7, 'ae', 0, 'qwq', '0000-00-00'),
+(8, '3124', 123, 'eq', '0011-11-01'),
+(9, '1968', 2390214, 'nepal', '2019-12-31');
 
 -- --------------------------------------------------------
 
@@ -160,6 +166,57 @@ INSERT INTO `country` (`id`, `country_name`, `username`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `employee1`
+--
+
+CREATE TABLE `employee1` (
+  `empid` int(11) NOT NULL,
+  `emp_number` varchar(32) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `age` varchar(128) NOT NULL,
+  `gender` varchar(128) NOT NULL,
+  `address` varchar(128) NOT NULL,
+  `contact_num` varchar(128) NOT NULL,
+  `dept` varchar(128) NOT NULL,
+  `workinghrs` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee1`
+--
+
+INSERT INTO `employee1` (`empid`, `emp_number`, `name`, `age`, `gender`, `address`, `contact_num`, `dept`, `workinghrs`) VALUES
+(2, '12', 'ad', 'eqe', 'q', 'd', 'd', 'ad', 'e'),
+(8, '', 'sanjiv', '15', 'gender', 'address', 'contact', 'dept', 'working_hr'),
+(9, '9', 'pite', '16', 'male', 'banepa', '980', 'maths', '10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employees`
+--
+
+CREATE TABLE `employees` (
+  `empid` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `age` int(11) NOT NULL,
+  `gender` varchar(250) NOT NULL,
+  `address` varchar(250) NOT NULL,
+  `contact_num` int(11) NOT NULL,
+  `dept` varchar(250) NOT NULL,
+  `workinghrs` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`empid`, `name`, `age`, `gender`, `address`, `contact_num`, `dept`, `workinghrs`) VALUES
+(0, 'sanjiv gautam', 20, 'female', 'dhulikhel', 2147483647, 'sanitary', 22);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `flight_schedule`
 --
 
@@ -168,7 +225,7 @@ CREATE TABLE `flight_schedule` (
   `flight_day` varchar(32) NOT NULL,
   `departure` time NOT NULL,
   `arrival` time NOT NULL,
-  `aircraft` int(11) NOT NULL,
+  `aircraft_no` int(11) NOT NULL,
   `routecode` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -176,13 +233,16 @@ CREATE TABLE `flight_schedule` (
 -- Dumping data for table `flight_schedule`
 --
 
-INSERT INTO `flight_schedule` (`flid`, `flight_day`, `departure`, `arrival`, `aircraft`, `routecode`) VALUES
+INSERT INTO `flight_schedule` (`flid`, `flight_day`, `departure`, `arrival`, `aircraft_no`, `routecode`) VALUES
 (1, 'thursday', '19:25:00', '09:00:00', 1111, 'Kath-Pokh'),
 (3, 'friday', '15:00:00', '17:00:00', 1111, 'Kath-Pokh'),
 (4, 'thursday', '14:00:00', '14:25:00', 2222, 'Kath-Pokh'),
 (5, 'thursday', '17:00:00', '17:25:00', 1113, 'Kath-Pokh'),
 (6, 'thursday', '08:00:00', '08:25:00', 1115, 'Kath-Pokh'),
-(7, 'sunday', '15:30:00', '16:45:00', 2222, 'Pokh-Bira');
+(7, 'sunday', '15:30:00', '16:45:00', 2222, 'Pokh-Bira'),
+(8, 'thursday', '23:33:00', '12:32:00', 1234, '1233-1234'),
+(9, 'monday', '12:23:00', '11:11:00', 1234, '1243-1939'),
+(10, 'ad', '12:03:00', '14:13:00', 1235, 'Kath-Pokh');
 
 -- --------------------------------------------------------
 
@@ -262,7 +322,8 @@ INSERT INTO `passenger` (`psid`, `contact`, `status`) VALUES
 (13, 2, 'paid'),
 (14, 2, 'booking'),
 (15, 1, 'paid'),
-(16, 1, 'booking');
+(16, 1, 'booking'),
+(17, 0, 'booking');
 
 -- --------------------------------------------------------
 
@@ -287,7 +348,8 @@ INSERT INTO `plane` (`post_id`, `post_title`, `post_date`, `post_author`, `post_
 (1, 'buddha air', '2017-05-13', 'sangam', 'america.jpg', 'Buddha airline is beautiful'),
 (2, 'buddha air', '2017-05-13', 'sangam', 'america.jpg', 'Buddha airline is beautiful'),
 (3, '', '2017-05-16', '', '', ''),
-(4, 'qatar', '2017-05-16', 'bipul', 'los.jpg', 'fsdflajslkfhads');
+(4, 'qatar', '2017-05-16', 'bipul', 'los.jpg', 'fsdflajslkfhads'),
+(5, 'hello ', '2018-07-20', 'bigyan', '880665-road-wallpapers.jpg', 'hello from nepal');
 
 -- --------------------------------------------------------
 
@@ -390,7 +452,7 @@ ALTER TABLE `address`
 --
 ALTER TABLE `aircrafts`
   ADD PRIMARY KEY (`ac_id`),
-  ADD UNIQUE KEY `ac_number` (`ac_number`);
+  ADD UNIQUE KEY `ac_number` (`aircraft_no`);
 
 --
 -- Indexes for table `airfare`
@@ -409,6 +471,19 @@ ALTER TABLE `contact_details`
 --
 ALTER TABLE `country`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `employee1`
+--
+ALTER TABLE `employee1`
+  ADD PRIMARY KEY (`empid`),
+  ADD UNIQUE KEY `emp_number` (`emp_number`);
+
+--
+-- Indexes for table `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`empid`);
 
 --
 -- Indexes for table `flight_schedule`
@@ -468,7 +543,7 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `aircrafts`
 --
 ALTER TABLE `aircrafts`
-  MODIFY `ac_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ac_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `airfare`
@@ -489,22 +564,28 @@ ALTER TABLE `country`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `employee1`
+--
+ALTER TABLE `employee1`
+  MODIFY `empid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `flight_schedule`
 --
 ALTER TABLE `flight_schedule`
-  MODIFY `flid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `flid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `psid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `psid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `plane`
 --
 ALTER TABLE `plane`
-  MODIFY `post_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `post_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `register`
